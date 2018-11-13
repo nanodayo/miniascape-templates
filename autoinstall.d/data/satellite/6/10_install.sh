@@ -92,7 +92,7 @@ test -f ${f} || (
 test -d ${LOGDIR:?} || mkdir -p ${LOGDIR}
 satellite-installer --scenario satellite --help
 satellite-installer --scenario satellite \
-  ${SATELLITE_INSTALLER_OPTIONS:?} | \
+  "${SATELLITE_INSTALLER_OPTIONS[@]:?}" | \
 		tee 2>&1 ${LOGDIR}/satellite-installer.$(date +%F_%T).log && touch $f
 )
 

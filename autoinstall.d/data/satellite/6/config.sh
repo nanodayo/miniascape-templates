@@ -59,9 +59,9 @@ RHEL_ISO=$(ls -1t ${ISO_DIR}/rhel*.iso | head -n 1)
 SATELLITE_ISO=$(ls -1t ${ISO_DIR}/satellite*.iso | head -n 1)
 USE_RPM_INSTALL_SCRIPT=no
 
-SATELLITE_INSTALLER_OPTIONS="
+SATELLITE_INSTALLER_OPTIONS=(
 {{- '--foreman-admin-email=%s' % satellite.admin.email|default('root@localhost') }} \
-{{  '--foreman-initial-organization=%s' % satellite.organization if satellite.organization }} \
+{{  "'--foreman-initial-organization=%s'" % satellite.organization if satellite.organization }} \
 {{  '--foreman-initial-location=%s' % satellite.location if satellite.location }} \
 {% if satellite.tls is defined -%} \
 {{    '--certs-country=%s' % satellite.tls.country if satellite.tls.country else 'JP' }} \
@@ -77,7 +77,7 @@ SATELLITE_INSTALLER_OPTIONS="
 {{     '--katello-proxy-username=%s' % proxy.user if proxy.user }} \
 {{     '--katello-proxy-password=%s' % proxy.password if proxy.password }} \
 {% endif -%}
-"
+)
 
 ORG_NAME="{{ satellite.organization|default('Default Organization') }}"
 ORG_LABEL="${ORG_NAME// /_}"
