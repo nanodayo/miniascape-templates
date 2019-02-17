@@ -96,6 +96,8 @@ satellite-installer --scenario satellite \
 		tee 2>&1 ${LOGDIR}/satellite-installer.$(date +%F_%T).log && touch $f
 )
 
+tweak_selinux_policy
+
 # vim:sw=2:ts=2:et:
 {#
 #}

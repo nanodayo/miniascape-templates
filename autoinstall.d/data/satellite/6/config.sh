@@ -92,9 +92,15 @@ CURL_PROXY_OPT=""
 PROXY_URL={{ "http://%s:%s" % (proxy.fqdn, proxy.port|default('8080')) }}
 CURL_PROXY_OPT="${CURL_PROXY_OPT} --proxy ${PROXY_URL} {{ ' --proxy-user %s:%s' % (proxy.user, proxy.password) if proxy.user and proxy.password }}"
 tweak_selinux_policy () {
-  semanage port -at foreman_proxy_port_t -p tcp {{ proxy.port|default('8080') }} || :
-  katello-service restart
-  foreman-rake katello:reindex
+{#
+ # See https://projects.theforeman.org/projects/foreman/wiki/SELinux
+ # https://access.redhat.com/solutions/1308183
+#}
+ semanage port -at foreman_proxy_port_t -p tcp {{ proxy.port|default('8080') }} || :
+{#
+ # katello-service restart
+ # foreman-rake katello:reindex
+#}
 }
 {% else -%}
 tweak_selinux_policy () { :; }
