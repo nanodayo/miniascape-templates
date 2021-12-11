@@ -1,0 +1,8 @@
+nfs_name={{ exportfs.name }}
+nfs_dir={{ exportfs.dir }}
+f=/etc/exports.d/${nfs_name}.exports
+cat << EOF > $f
+${nfs_dir} {{ rhui.rhua.fqdn }}(rw,no_root_squash) {{ rhui.cds.servers[0].fqdn }}(ro,no_root_squash) {{ rhui.cds.servers[1].fqdn }}(ro,no_root_squash)
+EOF
+
+mkdir -p "${nfs_dir}"
