@@ -55,6 +55,9 @@ extra_args="{{ 'inst.loglevel=debug inst.text inst.' if virtinst.os_variant and 
    virtinst.os_variant.startswith('rhel7')
 or virtinst.os_variant.startswith('rhel8')
 )}}ks=file:/${kscfg} {{ virtinst.extra_args|default('') }}"
+{%         if virtinst.os_variant and virtinst.os_variant.startswith('rhel8') -%}
+extra_args="$extra_args net.ifnames=0 biosdevname=0"
+{%         endif -%}
 {%         if interfaces|length > 1 -%}
 extra_args="$extra_args{{ ' ksdevice=%s' % ksdevice if ksdevice and not (virtinst and virtinst.os_variant in ('rhel7', 'fedora21')) }}"
 {%         endif -%}
