@@ -68,9 +68,13 @@ firewall-cmd --reload
 ) || :
 "
 
-RHUI_CERT_NAME={{ rhui.rhui_entitlement_cert }}
-RHUI_CERT=/root/setup/${RHUI_CERT_NAME:?}
-
+## Since RHUI4, certifications are implicitly installed when
+## running subscription-manager register[/attach] on RHUA.
+## Generally you don't have to upload explicitly.
+#
+# RHUI_CERT_NAME={{ rhui.rhui_entitlement_cert }}
+# RHUI_CERT=/root/setup/${RHUI_CERT_NAME:?}
+#
 RH_CDN_URL=https://cdn.redhat.com/content/dist/rhel/rhui/server/7/7Server/x86_64/os/repodata/repomd.xml
 
 RHUI_STORAGE_TYPE={{ rhui.storage.fstype }}
