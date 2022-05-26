@@ -25,7 +25,6 @@ EOF
 )
 
 test -d .gnupg/ || (
-(
 # to increase entropy on VMs.
 rpm -q rng-tools || yum install -y rng-tools
 rpm -q rpm-sign  || yum install -y rpm-sign
