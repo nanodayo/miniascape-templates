@@ -14,7 +14,7 @@ set -ex
 source ${0%/*}/config.sh
 
 # Check if RHUA can access https://cdn.redhat.com.
-if [ -n "${RH_CDN_URL}"]; then
+if [ -n "${RH_CDN_URL}" ]; then
     curl -v ${CURL_PROXY_OPT} --cacert /etc/rhsm/ca/redhat-uep.pem --cert ${RHUI_CERT:?} --connect-timeout 5 ${RH_CDN_URL}
 fi
 
