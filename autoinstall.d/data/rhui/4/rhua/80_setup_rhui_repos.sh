@@ -38,7 +38,7 @@ fi
 # List unused (not added) Yum repos as background job.
 rhui_repos_list="/root/setup/rhui_repos.txt"
 test -f ${rhui_repos_list:?} || \
-rhui-manager ${RHUI_AUTH_OPT} repo unused --by_repo_id | tee ${rhui_repos_list:?} &
+rhui-manager ${RHUI_AUTH_OPT} repo unused --by_repo_id | tee ${rhui_repos_list:?}
 
 # Add Yum repos not added yet
 f=/tmp/rhui-manager_repo_list.txt
