@@ -9,13 +9,14 @@
 #
 set -ex
 
-# RHUI_CERT_NAME, RHUI_AUTH_OPT, RHUI_CERT, RHUI_REPO_IDS, CURL_PROXY_OPT,
+# RHUI_AUTH_OPT, RHUI_REPO_IDS, CURL_PROXY_OPT,
 # RH_CDN_URL
 source ${0%/*}/config.sh
 
 # Check if RHUA can access https://cdn.redhat.com.
 if [ -n "${RH_CDN_URL}" ]; then
-    curl -v ${CURL_PROXY_OPT} --cacert /etc/rhsm/ca/redhat-uep.pem --cert ${RHUI_CERT:?} --connect-timeout 5 ${RH_CDN_URL}
+    # You can add "--cert /etc/pki/rhui/redhat/foo.pem" to the next command line.
+    curl -v ${CURL_PROXY_OPT} --cacert /etc/rhsm/ca/redhat-uep.pem --connect-timeout 5 ${RH_CDN_URL}
 fi
 
 # Maybe the auth cache will be expired during 'rhui-manager repo ...' commands
@@ -28,12 +29,6 @@ fi
 rhui_installer_logdir="/root/setup/logs"
 rhui_installer_log=${rhui_installer_logdir}/rhui-installer.$(date +%F_%T).log
 rhui_installer_stamp=${rhui_installer_logdir}/rhui-installer.stamp
-
-# Upload RHUI entitlement cert
-if [ -n "${RHUI_CERT_NAME}" ]; then
-    test -f /etc/pki/rhui/redhat/${RHUI_CERT_NAME} || \
-        rhui-manager ${RHUI_AUTH_OPT} cert upload --cert ${RHUI_CERT}
-fi
 
 # List unused (not added) Yum repos as background job.
 rhui_repos_list="/root/setup/rhui_repos.txt"
