@@ -18,8 +18,7 @@ Subkey-Type: default
 Expire-Date: 0
 Name-Real: RHUI Admin
 Name-Comment: GPG key for RHUI client config RPMs
-Passphrase: {{ gpg.passpharase }}
-%no-protection
+Passphrase: {{ gpg.passpharase|default('passphrase') }}
 %commit
 EOF
 )
