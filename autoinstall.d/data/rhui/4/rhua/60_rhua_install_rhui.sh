@@ -36,10 +36,6 @@ rhui-installer \
 touch ${rhui_installer_stamp}
 )
 
-rhui_username=admin
-rhui_password=$(awk '/password/ {print $3}' /etc/rhui/rhui-subscription-sync.conf)
-#RHUI_AUTH_OPT="--username ${rhui_username:?} --password ${rhui_password:?}"
-
 # Generate auth cache
 grep password /etc/rhui/rhui-subscription-sync.conf
 rhui-manager

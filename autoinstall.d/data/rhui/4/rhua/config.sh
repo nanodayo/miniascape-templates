@@ -82,12 +82,6 @@ RHUI_INSTALLER_TLS_OPTIONS="${RHUI_INSTALLER_TLS_OPTIONS:?} --proxy-username {{ 
 {%-    endif %}
 {%- endif %}
 
-## Comment out the followings as needed.
-#RHUI_USERNAME=admin
-#RHUI_PASSWORD=$(awk '/rhui_manager_password:/ { print $2; }' /etc/rhui-installer/answers.yaml || echo '')
-#test "x${RHUI_PASSWORD}" = "x" && RHUI_AUTH_OPT="" || \
-#RHUI_AUTH_OPT="--username ${RHUI_USERNAME:?} --password ${RHUI_PASSWORD:?}"
-
 RHUI_REPO_IDS="
 {%- for repo in rhui.repos if repo.id is defined and repo.id -%}
 {{      repo.id }}
