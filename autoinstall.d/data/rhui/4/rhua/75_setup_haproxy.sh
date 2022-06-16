@@ -1,7 +1,7 @@
 #! /bin/bash
 set -ex
 
-# CDS_SERVERS
+# LB_SERVERS
 source ${0%/*}/config.sh
 
 for lb in ${LB_SERVERS:?}; do
