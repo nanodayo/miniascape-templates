@@ -1,11 +1,10 @@
 #! /bin/bash
 #
-# It does several things to setup RHUI on RHUA.
+# Adds cds instances.
 #
 # Prerequisites:
-# - rhui-installer was installed from RHUI ISO image
-# - CDS are ready and accessible with ssh from RHUA w/o password
-# - Gluster FS was setup in CDSes and ready to access from RHUA
+# - rhui-installer was run.
+# - CDS are ready and accessible with ssh from RHUA w/o password.
 #
 set -ex
 

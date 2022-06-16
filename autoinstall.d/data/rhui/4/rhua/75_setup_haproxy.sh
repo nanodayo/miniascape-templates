@@ -1,4 +1,11 @@
 #! /bin/bash
+#
+# Adds load balancers.
+#
+# Prerequisites:
+# - rhui-installer was run.
+# - LB is ready and accessible with ssh from RHUA w/o password.
+#
 set -ex
 
 # LB_SERVERS
