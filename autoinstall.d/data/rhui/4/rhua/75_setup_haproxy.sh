@@ -1,21 +1,26 @@
 #! /bin/bash
+#
+# Adds load balancers.
+#
+# Prerequisites:
+# - rhui-installer was run.
+# - LB is ready and accessible with ssh from RHUA w/o password.
+#
 set -ex
 
-# RHUI_AUTH_OPT, CDS_SERVERS
+# LB_SERVERS
 source ${0%/*}/config.sh
-
-RHUI_AUTH_OPT=""  # Force set empty to avoid to password was printed.
 
 for lb in ${LB_SERVERS:?}; do
     test ${FORCE_ADD_LB:?} = 1 && \
-        rhui-manager ${RHUI_AUTH_OPT} haproxy add --hostname ${lb} --ssh_user root --keyfile_path /root/.ssh/id_rsa --force \
+        rhui-manager --noninteractive haproxy add --hostname ${lb} --ssh_user root --keyfile_path /root/.ssh/id_rsa_rhua --force \
     || (
-        rhui-manager ${RHUI_AUTH_OPT} haproxy list --machine_readable | grep -E "hostname.: .${lb}" || \
-        rhui-manager ${RHUI_AUTH_OPT} haproxy add --hostname ${lb} --ssh_user root --keyfile_path /root/.ssh/id_rsa
+        rhui-manager --noninteractive haproxy list --machine_readable | grep -E "hostname.: .${lb}" || \
+        rhui-manager --noninteractive haproxy add --hostname ${lb} --ssh_user root --keyfile_path /root/.ssh/id_rsa_rhua
     )
 done
 
 # Check
-rhui-manager haproxy list
+rhui-manager --noninteractive haproxy list
 
 # vim:sw=4:ts=4:et:
