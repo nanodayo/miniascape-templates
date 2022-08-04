@@ -13,10 +13,10 @@ source ${0%/*}/config.sh
 
 for cds in ${CDS_SERVERS:?}; do
     test ${FORCE_ADD_CDS:?} = 1 && \
-        rhui-manager --noninteractive cds add --hostname ${cds} --ssh_user root --keyfile_path /root/.ssh/id_rsa_rhua --force \
+        rhui-manager --noninteractive cds add --hostname ${cds} --ssh_user root --keyfile_path /root/.ssh/id_rsa --force \
     || (
         rhui-manager --noninteractive cds list --machine_readable | grep -E "hostname.: .${cds}" || \
-        rhui-manager --noninteractive cds add --hostname ${cds} --ssh_user root --keyfile_path /root/.ssh/id_rsa_rhua
+        rhui-manager --noninteractive cds add --hostname ${cds} --ssh_user root --keyfile_path /root/.ssh/id_rsa
     )
 done
 
