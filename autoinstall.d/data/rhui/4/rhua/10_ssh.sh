@@ -2,6 +2,15 @@
 #
 # .. seealso:: RHUI 3.0 System Admin Guide, 6.1. Generate an RSA Key Pair: http://red.ht/2r8pkHh
 #
+# Use with:
+# - 70_setup_cds.sh
+# - 75_setup_haproxy.sh
+#
+# Don't use with:
+# - 61_ssh_rhua.sh
+# - 71_setup_cds_rhua.sh
+# - 76_setup_haproxy_rhua.sh
+#
 set -ex
 
 source ${0%/*}/config.sh
