@@ -31,7 +31,7 @@ rhui_installer_options="\
 rhui-installer \
     ${rhui_installer_common_options} \
     ${rhui_installer_options:?} \
-    ${RHUI_INSTALLER_TLS_OPTIONS:?} \
+    "${RHUI_INSTALLER_TLS_OPTIONS[@]:?}" \
 | tee 2>&1 ${rhui_installer_log} && \
 touch ${rhui_installer_stamp}
 )
