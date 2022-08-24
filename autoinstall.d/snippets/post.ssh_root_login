@@ -1,0 +1,1 @@
+echo "PermitRootLogin yes" > /etc/ssh/sshd_config.d/01-permitrootlogin.conf
