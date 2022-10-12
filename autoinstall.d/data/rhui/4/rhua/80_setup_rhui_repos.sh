@@ -23,6 +23,10 @@ rhui_installer_logdir="/root/setup/logs"
 rhui_installer_log=${rhui_installer_logdir}/rhui-installer.$(date +%F_%T).log
 rhui_installer_stamp=${rhui_installer_logdir}/rhui-installer.stamp
 
+# Sync entitlement certifications immediately.
+# See /etc/cron.hourly/synchronize-rhui-subscriptions.
+/usr/bin/rhui-subscription-sync
+
 # List unused (not added) Yum repos as background job.
 rhui_repos_list="/root/setup/rhui_repos.txt"
 test -f ${rhui_repos_list:?} || \
