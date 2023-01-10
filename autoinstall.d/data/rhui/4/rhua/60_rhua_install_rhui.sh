@@ -29,6 +29,7 @@ rhui_installer_options="\
 "
 
 rhui-installer \
+    --rerun \
     ${rhui_installer_common_options} \
     ${rhui_installer_options:?} \
     "${RHUI_INSTALLER_TLS_OPTIONS[@]:?}" \
