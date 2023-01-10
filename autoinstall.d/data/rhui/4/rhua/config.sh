@@ -74,7 +74,21 @@ RHUI_STORAGE_TYPE={{ rhui.storage.fstype }}
 RHUI_STORAGE_MOUNT={{ rhui.storage.server }}:{{ rhui.storage.mnt }}
 RHUI_STORAGE_MOUNT_OPTIONS="{{ rhui.storage.mnt_options|join(',')|default('rw') }}"
 
+{%- if rhui.tls is defined %}
 RHUI_INSTALLER_TLS_OPTIONS=("--certs-country" "{{ rhui.tls.country|default('JP') }}" "--certs-state" "{{ rhui.tls.state|default('Tokyo') }}" "--certs-city" "{{ rhui.tls.city }}" "--certs-org" "{{ rhui.tls.org }}" "--certs-org-unit" "{{ rhui.tls.unit|default('') }}")
+{%- endif %}
+
+{%- if rhui.user_tls is defined %}
+RHUI_INSTALLER_TLS_OPTIONS=(\
+    "--user-supplied-rhui-ca-crt" "{{ rhui.user_tls.ca_crt|default('./setup/rhui-ca.crt') }}" \
+    "--user-supplied-rhui-ca-key" "{{ rhui.user_tls.ca_key|default('./setup/rhui-ca.key') }}" \
+    "--user-supplied-client-ssl-ca-crt" "{{ rhui.user_tls.client_ssl_ca_crt|default('./setup/rhui-ca.crt') }}" \
+    "--user-supplied-client-ssl-ca-key" "{{ rhui.user_tls.client_ssl_ca_key|default('./setup/rhui-ca.key') }}" \
+    "--user-supplied-client-entitlement-ca-crt" "{{ rhui.user_tls.client_entitlement_ca_crt|default('./setup/rhui-ca.crt') }}" \
+    "--user-supplied-client-entitlement-ca-key" "{{ rhui.user_tls.client_entitlement_ca_key|default('./setup/rhui-ca.key') }}" \
+)
+{%- endif %}
+
 {%- if proxy is defined and proxy.fqdn is defined %}
 RHUI_INSTALLER_TLS_OPTIONS="${RHUI_INSTALLER_TLS_OPTIONS:?} --proxy-protocol {{ proxy.protocol|default('http') }} --proxy-hostname {{ proxy.fqdn }} --proxy-port {{ proxy.port|default("443") }}"
 {%-    if proxy.user is defined %}
