@@ -103,7 +103,6 @@ ${location_opts} \
 --disk {{ disk_option(disk) }} \
 {%     endfor %} \
 {%     for nic in interfaces -%}
---boot uefi,nvram_template=/usr/share/OVMF/OVMF_VARS.secboot.fd \
 --network {{ net_option(nic) }} \
 {%     endfor %} \
 {{     ' --clock %s' % virtinst.clock if virtinst.clock }} \
