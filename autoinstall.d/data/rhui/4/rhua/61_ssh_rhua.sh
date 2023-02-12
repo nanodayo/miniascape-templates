@@ -21,12 +21,12 @@ set -ex
 
 source ${0%/*}/config.sh
 
-for cds in ${CDS_SERVERS:?} ${LB_SERVERS:?}; do
+for cds in ${CDS_SERVERS:?} ${LB_SERVERS}; do
     ssh-copy-id -i /root/.ssh/id_rsa_rhua ${cds}
 done
 
 # Check
-for cds in ${CDS_SERVERS:?} ${LB_SERVERS:?}; do
+for cds in ${CDS_SERVERS:?} ${LB_SERVERS}; do
     echo "# Check ${cds}"
     ssh -i /root/.ssh/id_rsa_rhua $cds "test -f ./setup/check.sh && time ./setup/check.sh || (hostname -f; date; ip a; ip r)"
 done
