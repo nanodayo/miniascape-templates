@@ -27,7 +27,7 @@ while read line
 do
     test "x$line" = "x" && continue || :
     name=${line%% *}; repos=${line#* };
-    version=1.0;
+    version=`echo "${RHUI_CLIENT_RPM_VERSIONS}" | grep ${name} | cut -f2 -d' '`;
     rhui-manager --noninteractive client rpm \
         --cert --rpm_name ${name:?} --rpm_version ${version:?} \
         --repo_label ${repos:?} \
