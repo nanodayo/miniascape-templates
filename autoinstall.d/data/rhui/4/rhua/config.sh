@@ -110,7 +110,7 @@ RHUI_CLIENT_CERTS="
 {% endfor -%}
 "
 
-# format: <client_rpm_name> <client_rpm_repo_0> [<client_rpm_repo_1> ...]
+# format: <client_rpm_name> <client_rpm_version>
 RHUI_CLIENT_RPM_VERSIONS="
 {%- for crpm in rhui.client_rpms if crpm.name is defined and crpm.name -%}
 {{      crpm.name }} {{ crpm.version|default('1.0') }}
