@@ -17,10 +17,13 @@ RHUI_CLIENT_WORKDIR=${1:-/root/setup/clients/}
 RHUI_CLIENT_RPMS_DIR=${RHUI_CLIENT_WORKDIR:?}/rpms
 
 # Check
-find ${RHUI_CLIENT_WORKDIR}/ -type f
-
-rpms=$(find ${RHUI_CLIENT_WORKDIR}/ -type f | grep -E '.rpm$')
-for rpm in ${rpms}; do echo "# ${rpm##*/}"; rpm -qpl ${rpm}; rpm -qp --scripts ${rpm}; rpm -Kv ${rpm}; done
+for rpm in $(find ${RHUI_CLIENT_WORKDIR}/ -type f -name '*.rpm')
+do
+  echo "# ${rpm##*/}";
+  rpm -qpl ${rpm};
+  rpm -qp --scripts ${rpm};
+  rpm -Kv ${rpm};
+done
 
 while read line
 do
