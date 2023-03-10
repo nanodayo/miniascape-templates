@@ -1,7 +1,7 @@
 #! /bin/bash
 set -x
 
-custom_gpg_key=/root/setup/RPM-GPG-KEY-rhui-custom
+custom_gpg_key=/root/setup/rhui-custom
 custom_gpg_conf=/root/setup/rhui-gpg.conf
 
 test -d /root/setup || mkdir -p /root/setup
